@@ -1,5 +1,6 @@
 mocha.setup('tdd')
 var assert = chai.assert
+var spy = window.ispy
 
 test('trips called flag', function(){
   var s = spy()

@@ -1,0 +1,20 @@
+{
+  "name": "ispy",
+  "version": "0.0.0",
+  "description": "A simple spy.",
+  "main": "index.js",
+  "scripts": {
+    "test": "testem ci -l phantomjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/airportyh/ispy.git"
+  },
+  "keywords": [
+    "testing",
+    "spy"
+  ],
+  "author": "Toby Ho",
+  "license": "MIT",
+  "gitHead": "03edecc8bc19edae3053f67de1379b23ca77b008"
+}

@@ -1,3 +1,5 @@
+;(function(){
+
 function spy(){
 
   var spy = function(){
@@ -23,3 +25,13 @@ function spy(){
   return spy
 
 }
+
+if (typeof define !== 'undefined' && define.amd){
+  define(function(){ return spy })
+}else if (typeof module !== 'undefined' && module.exports){
+  module.exports = spy
+}else if (typeof window !== 'undefined'){
+  window.ispy = spy
+}
+
+}());
