@@ -1,9 +1,15 @@
 function spy(){
 
   var spy = function(){
-    spy._recordCall(arguments, this)
+    recordCall(arguments, this)
   }
-  spy._recordCall = function(args, context){
+  
+  spy.called = false
+  spy.callCount = 0
+  spy.lastCall = null
+  spy.calls = []
+
+  function recordCall(args, context){
     spy.called = true
     spy.callCount++
     var call = {
@@ -13,10 +19,6 @@ function spy(){
     spy.calls.push(call)
     spy.lastCall = call
   }
-  spy.called = false
-  spy.callCount = 0
-  spy.lastCall = null
-  spy.calls = []
 
   return spy
 
