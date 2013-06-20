@@ -4,6 +4,10 @@ function spy(){
 
   var spy = function(){
     recordCall(arguments, this)
+    if ('delegate' in spy){
+      return spy.delegate.apply(this, arguments)
+    }
+    if ('returnValue' in spy) return spy.returnValue
   }
   
   spy.called = false
@@ -20,6 +24,16 @@ function spy(){
     }
     spy.calls.push(call)
     spy.lastCall = call
+  }
+
+  spy.returns = function(value){
+    spy.returnValue = value
+    return spy
+  }
+
+  spy.delegatesTo = function(fun){
+    spy.delegate = fun
+    return spy
   }
 
   return spy

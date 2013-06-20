@@ -39,4 +39,12 @@ test('short hand for last call', function(){
   assert.deepEqual(s.lastCall.args, [1])
 })
 
+test('can specify return value', function(){
+  var s = spy().returns(1)
+  assert.equal(s(), 1)
+})
 
+test('can delegate to a function', function(){
+  var s = spy().delegatesTo(function(){ return 2 })
+  assert.equal(s(), 2)
+})
