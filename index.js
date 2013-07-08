@@ -43,11 +43,21 @@ function spy(){
     spy.callbacks.push(callback)
   }
 
+  spy.once = function(evt, callback){
+    callback.once = true
+    spy.on(evt, callback)
+  }
+
   spy.notify = function(args, cxt){
+    var whatsLeft = []
     for (var i = 0; i < spy.callbacks.length; i++){
       var cb = spy.callbacks[i]
       cb.apply(cxt, args)
+      if (!cb.once){
+        whatsLeft.push(cb)
+      }
     }
+    spy.callbacks = whatsLeft
   }
 
   return spy
