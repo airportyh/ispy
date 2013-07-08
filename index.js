@@ -4,6 +4,7 @@ function spy(){
 
   var spy = function(){
     recordCall(arguments, this)
+    spy.notify(arguments, this)
     if ('delegate' in spy){
       return spy.delegate.apply(this, arguments)
     }
@@ -14,6 +15,7 @@ function spy(){
   spy.callCount = 0
   spy.lastCall = null
   spy.calls = []
+  spy.callbacks = []
 
   function recordCall(args, context){
     spy.called = true
@@ -34,6 +36,18 @@ function spy(){
   spy.delegatesTo = function(fun){
     spy.delegate = fun
     return spy
+  }
+
+  spy.on = function(evt, callback){
+    if (evt !== 'call') throw new Error('ispy doesn\'t support event ' + evt)
+    spy.callbacks.push(callback)
+  }
+
+  spy.notify = function(args, cxt){
+    for (var i = 0; i < spy.callbacks.length; i++){
+      var cb = spy.callbacks[i]
+      cb.apply(cxt, args)
+    }
   }
 
   return spy

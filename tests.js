@@ -48,3 +48,14 @@ test('can delegate to a function', function(){
   var s = spy().delegatesTo(function(){ return 2 })
   assert.equal(s(), 2)
 })
+
+test('can listen to calls', function(done){
+  var s = spy()
+  var obj = {s: s}
+  s.on('call', function(n){
+    assert.equal(n, 1)
+    assert.strictEqual(this, obj)
+    done()
+  })
+  obj.s(1)
+})
