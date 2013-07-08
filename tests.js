@@ -49,7 +49,7 @@ test('can delegate to a function', function(){
   assert.equal(s(), 2)
 })
 
-test('can listen to calls', function(done){
+test('can listen to calls', function(){
   var s = spy()
   var obj = {s: s}
   var callCount = 0
@@ -61,10 +61,9 @@ test('can listen to calls', function(done){
   obj.s(1)
   obj.s(1)
   assert.equal(callCount, 2)
-  done()
 })
 
-test('can notify once', function(done){
+test('can notify once', function(){
   var callCount = 0
   var s = spy()
   s.once('call', function(){
@@ -73,5 +72,11 @@ test('can notify once', function(done){
   s()
   s()
   assert.equal(callCount, 1)
-  done()
+})
+
+test('it can reset', function(){
+  var s = spy()
+  s()
+  s.reset()
+  assert(!s.called)
 })

@@ -11,11 +11,15 @@ function spy(){
     if ('returnValue' in spy) return spy.returnValue
   }
   
-  spy.called = false
-  spy.callCount = 0
-  spy.lastCall = null
-  spy.calls = []
-  spy.callbacks = []
+  spy.initialize = function(){
+    spy.called = false
+    spy.callCount = 0
+    spy.lastCall = null
+    spy.calls = []
+    spy.callbacks = []
+  }
+
+  spy.reset = spy.initialize
 
   function recordCall(args, context){
     spy.called = true
@@ -59,6 +63,8 @@ function spy(){
     }
     spy.callbacks = whatsLeft
   }
+
+  spy.initialize()
 
   return spy
 
